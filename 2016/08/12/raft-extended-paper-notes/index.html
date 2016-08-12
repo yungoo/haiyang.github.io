@@ -4,17 +4,41 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>技术之路</title>
+  <title>《In Search of an Understandable Consensus Algorithm(Extended Version)》阅读笔记 | 技术之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="发现、记录、分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="技术之路">
-<meta property="og:url" content="http://yungoo.github.io/index.html">
+  <meta name="description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://raft.github.io/raft.pdf
+&amp;#x7F51;&amp;#x7AD9;&amp;#xFF1A;https://raft.github.io
+
+Raft&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x4E3A;&amp;#x4E86;&amp;#x7BA1;&amp;#x7406;&amp;#x65E5;&amp;#x5FD7;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《In Search of an Understandable Consensus Algorithm(Extended Version)》阅读笔记">
+<meta property="og:url" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/index.html">
 <meta property="og:site_name" content="技术之路">
-<meta property="og:description" content="发现、记录、分享">
+<meta property="og:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://raft.github.io/raft.pdf
+&amp;#x7F51;&amp;#x7AD9;&amp;#xFF1A;https://raft.github.io
+
+Raft&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x4E3A;&amp;#x4E86;&amp;#x7BA1;&amp;#x7406;&amp;#x65E5;&amp;#x5FD7;&amp;#x">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/raft-property.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/raft-state-transition.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/log-entries.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/inconsistency_check.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/figure-8.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/split-votes.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/configuration-changes.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/snapshotting.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/install_snapshot.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/steps_to_mitigate_bias.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/quiz_score.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/understandablity_survey.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/leader_election_performance.png">
+<meta property="og:updated_time" content="2016-08-12T02:48:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="技术之路">
-<meta name="twitter:description" content="发现、记录、分享">
+<meta name="twitter:title" content="《In Search of an Understandable Consensus Algorithm(Extended Version)》阅读笔记">
+<meta name="twitter:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://raft.github.io/raft.pdf
+&amp;#x7F51;&amp;#x7AD9;&amp;#xFF1A;https://raft.github.io
+
+Raft&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x4E3A;&amp;#x4E86;&amp;#x7BA1;&amp;#x7406;&amp;#x65E5;&amp;#x5FD7;&amp;#x">
+<meta name="twitter:image" content="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/raft-property.png">
   
     <link rel="alternative" href="/atom.xml" title="技术之路" type="application/atom+xml">
   
@@ -150,79 +174,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-raft-learning-plan" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/12/raft-learning-plan/" class="article-date">
-  	<time datetime="2016-08-12T02:49:18.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/raft-learning-plan/">Raft学习计划</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="&#x5B66;&#x4E60;-amp-&#x7FFB;&#x8BD1;&#x8BBA;&#x6587;"><a href="#&#x5B66;&#x4E60;-amp-&#x7FFB;&#x8BD1;&#x8BBA;&#x6587;" class="headerlink" title="&#x5B66;&#x4E60;&amp;&#x7FFB;&#x8BD1;&#x8BBA;&#x6587;"></a>&#x5B66;&#x4E60;&amp;&#x7FFB;&#x8BD1;&#x8BBA;&#x6587;</h2><ul>
-<li>&#x300A;In Search of an Understandable Consensus Algorithm (Extended Version) by Diego Ongaro and John Ousterhout&#x300B;<a href="https://raft.github.io/raft.pdf" target="_blank" rel="external">https://raft.github.io/raft.pdf</a></li>
-</ul>
-<h2 id="&#x5B66;&#x4E60;&#x76F8;&#x5173;&#x8BBA;&#x6587;"><a href="#&#x5B66;&#x4E60;&#x76F8;&#x5173;&#x8BBA;&#x6587;" class="headerlink" title="&#x5B66;&#x4E60;&#x76F8;&#x5173;&#x8BBA;&#x6587;"></a>&#x5B66;&#x4E60;&#x76F8;&#x5173;&#x8BBA;&#x6587;</h2><ul>
-<li><a href="http://verdi.uwplse.org/" target="_blank" rel="external">Planning for Change in a Formal Verification of the Raft Consensus Protocol</a></li>
-<li><a href="http://verdi.uwplse.org/" target="_blank" rel="external">Verdi: A Framework for Implementing and Verifying Distributed Systems</a></li>
-<li><a href="https://hal.inria.fr/hal-01086522" target="_blank" rel="external">Automatic Distributed Code Generation from Formal Models of Asynchronous Concurrent Processes</a></li>
-<li><a href="http://www.cl.cam.ac.uk/~ms705/pub/papers/2015-osr-raft.pdf" target="_blank" rel="external">http://www.cl.cam.ac.uk/~ms705/pub/papers/2015-osr-raft.pdf</a></li>
-<li><a href="http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-857.html" target="_blank" rel="external">ARC: Analysis of Raft Consensus</a></li>
-</ul>
-<h2 id="&#x9605;&#x8BFB;&#x6E90;&#x4EE3;&#x7801;"><a href="#&#x9605;&#x8BFB;&#x6E90;&#x4EE3;&#x7801;" class="headerlink" title="&#x9605;&#x8BFB;&#x6E90;&#x4EE3;&#x7801;"></a>&#x9605;&#x8BFB;&#x6E90;&#x4EE3;&#x7801;</h2><ul>
-<li>jraft(java) - <a href="https://github.com/andy-yx-chen/jraft" target="_blank" rel="external">https://github.com/andy-yx-chen/jraft</a></li>
-<li>kudu(cpp) - <a href="https://github.com/apache/incubator-kudu" target="_blank" rel="external">https://github.com/apache/incubator-kudu</a></li>
-</ul>
-<h2 id="&#x6D4B;&#x8BD5;&#x9879;&#x76EE;"><a href="#&#x6D4B;&#x8BD5;&#x9879;&#x76EE;" class="headerlink" title="&#x6D4B;&#x8BD5;&#x9879;&#x76EE;"></a>&#x6D4B;&#x8BD5;&#x9879;&#x76EE;</h2><h2 id="&#x6027;&#x80FD;&#x8BC4;&#x4F30;"><a href="#&#x6027;&#x80FD;&#x8BC4;&#x4F30;" class="headerlink" title="&#x6027;&#x80FD;&#x8BC4;&#x4F30;"></a>&#x6027;&#x80FD;&#x8BC4;&#x4F30;</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raft-plan/">raft plan</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-raft-extended-paper-notes" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-raft-extended-paper-notes" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/08/12/raft-extended-paper-notes/" class="article-date">
@@ -238,12 +190,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/raft-extended-paper-notes/">《In Search of an Understandable Consensus Algorithm(Extended Version)》阅读笔记</a>
+    <h1 class="article-title" itemprop="name">
+      《In Search of an Understandable Consensus Algorithm(Extended Version)》阅读笔记
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raft-algorithm-distribute-system/">raft algorithm distribute-system</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -730,106 +693,77 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raft-algorithm-distribute-system/">raft algorithm distribute-system</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-java-faq" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/12/java-faq/" class="article-date">
-  	<time datetime="2016-08-12T02:33:59.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+<nav id="article-nav">
+  
+    <a href="/2016/08/12/raft-learning-plan/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
         
+          Raft学习计划
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/java-faq/">java-faq</a>
-    </h1>
   
+    <a href="/2016/08/12/java-faq/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java-faq</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="0-TreeMap-LinkedHashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;-&#x5982;&#x4F55;&#x4FDD;&#x8BC1;&#x6709;&#x5E8F;"><a href="#0-TreeMap-LinkedHashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;-&#x5982;&#x4F55;&#x4FDD;&#x8BC1;&#x6709;&#x5E8F;" class="headerlink" title="0. TreeMap LinkedHashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406; &#x5982;&#x4F55;&#x4FDD;&#x8BC1;&#x6709;&#x5E8F;"></a>0. TreeMap LinkedHashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406; &#x5982;&#x4F55;&#x4FDD;&#x8BC1;&#x6709;&#x5E8F;</h2><p>&#x5BB9;&#x5668;&#x6709;&#x5E8F;&#x6307;&#x8FED;&#x4EE3;&#x5BB9;&#x5668;&#x65F6;&#x6309;&#x987A;&#x5E8F;&#x8FD4;&#x56DE;&#x3002;<br>TreeMap&#x4F7F;&#x7528;&#x7EA2;&#x9ED1;&#x6811;&#x5B9E;&#x73B0;&#xFF0C;&#x57FA;&#x4E8E;&#x6BD4;&#x8F83;&#x5B9E;&#x73B0;&#x6709;&#x5E8F;&#x3002;<br>LinkedHashMap&#x4F7F;&#x7528;&#x53CC;&#x5411;&#x94FE;&#x8868;&#x4FDD;&#x8BC1;&#x6309;&#x63D2;&#x5165;&#x987A;&#x5E8F;&#x5B58;&#x50A8;&#x3002;<br>&#x53C2;&#x7740;<a href="http://yikun.github.io/2015/04/02/Java-LinkedHashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="external">http://yikun.github.io/2015/04/02/Java-LinkedHashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/</a></p>
-<h2 id="1-java-concurrent&#x5305;&#x91CC;&#x6709;&#x4EC0;&#x4E48;&#xFF1F;CyclicBarrier&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#1-java-concurrent&#x5305;&#x91CC;&#x6709;&#x4EC0;&#x4E48;&#xFF1F;CyclicBarrier&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="1. java.concurrent&#x5305;&#x91CC;&#x6709;&#x4EC0;&#x4E48;&#xFF1F;CyclicBarrier&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"></a>1. java.concurrent&#x5305;&#x91CC;&#x6709;&#x4EC0;&#x4E48;&#xFF1F;CyclicBarrier&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h2><h2 id="2-java-nio&#x91CC;&#x7684;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x90A3;&#x4E9B;&#x5185;&#x5BB9;"><a href="#2-java-nio&#x91CC;&#x7684;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x90A3;&#x4E9B;&#x5185;&#x5BB9;" class="headerlink" title="2. java.nio&#x91CC;&#x7684;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x90A3;&#x4E9B;&#x5185;&#x5BB9;"></a>2. java.nio&#x91CC;&#x7684;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x90A3;&#x4E9B;&#x5185;&#x5BB9;</h2><h2 id="3-&#x865A;&#x62DF;&#x673A;GC&#x7684;&#x6709;&#x54EA;&#x4E9B;&#x56DE;&#x6536;&#x5668;&#xFF0C;&#x7B56;&#x7565;&#x662F;&#x4EC0;&#x4E48;"><a href="#3-&#x865A;&#x62DF;&#x673A;GC&#x7684;&#x6709;&#x54EA;&#x4E9B;&#x56DE;&#x6536;&#x5668;&#xFF0C;&#x7B56;&#x7565;&#x662F;&#x4EC0;&#x4E48;" class="headerlink" title="3. &#x865A;&#x62DF;&#x673A;GC&#x7684;&#x6709;&#x54EA;&#x4E9B;&#x56DE;&#x6536;&#x5668;&#xFF0C;&#x7B56;&#x7565;&#x662F;&#x4EC0;&#x4E48;"></a>3. &#x865A;&#x62DF;&#x673A;GC&#x7684;&#x6709;&#x54EA;&#x4E9B;&#x56DE;&#x6536;&#x5668;&#xFF0C;&#x7B56;&#x7565;&#x662F;&#x4EC0;&#x4E48;</h2><h2 id="4-&#x6709;&#x54EA;&#x4E9B;ClassLoader&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x53CC;&#x4EB2;&#x5206;&#x6D3E;&#xFF0C;&#x7528;&#x6765;&#x89E3;&#x51B3;&#x4EC0;&#x4E48;&#x95EE;&#x9898;"><a href="#4-&#x6709;&#x54EA;&#x4E9B;ClassLoader&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x53CC;&#x4EB2;&#x5206;&#x6D3E;&#xFF0C;&#x7528;&#x6765;&#x89E3;&#x51B3;&#x4EC0;&#x4E48;&#x95EE;&#x9898;" class="headerlink" title="4. &#x6709;&#x54EA;&#x4E9B;ClassLoader&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x53CC;&#x4EB2;&#x5206;&#x6D3E;&#xFF0C;&#x7528;&#x6765;&#x89E3;&#x51B3;&#x4EC0;&#x4E48;&#x95EE;&#x9898;"></a>4. &#x6709;&#x54EA;&#x4E9B;ClassLoader&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x53CC;&#x4EB2;&#x5206;&#x6D3E;&#xFF0C;&#x7528;&#x6765;&#x89E3;&#x51B3;&#x4EC0;&#x4E48;&#x95EE;&#x9898;</h2><blockquote>
-<p><a href="http://my.oschina.net/xionghui/blog/499725" target="_blank" rel="external">http://my.oschina.net/xionghui/blog/499725</a></p>
-</blockquote>
-<ul>
-<li>BootstrapClassLoader &#x7528;&#x6765;&#x5F15;&#x5BFC;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#xFF0C;&#x4E0D;&#x7EE7;&#x627F;ClassLoader</li>
-<li>ExtClassLoader &#x7528;&#x6765;&#x52A0;&#x8F7D;java&#x7684;&#x6269;&#x5C55;&#x5E93;</li>
-<li>AppClassLoader &#x7528;&#x6765;&#x52A0;&#x8F7D;&#x5E94;&#x7528;&#x7C7B;</li>
-</ul>
-<p>&#x4ED6;&#x4EEC;&#x7EC4;&#x6210;&#x6811;&#x72B6;&#x7ED3;&#x6784;</p>
-<p>&#x53CC;&#x4EB2;&#x5206;&#x6D3E;&#x673A;&#x5236;</p>
-<ul>
-<li>&#x5F53;AppClassLoader&#x52A0;&#x8F7D;&#x4E00;&#x4E2A;class&#x65F6;&#xFF0C;&#x5B83;&#x9996;&#x5148;&#x4E0D;&#x4F1A;&#x81EA;&#x5DF1;&#x53BB;&#x5C1D;&#x8BD5;&#x52A0;&#x8F7D;&#x8FD9;&#x4E2A;&#x7C7B;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x7C7B;&#x52A0;&#x8F7D;&#x8BF7;&#x6C42;&#x59D4;&#x6D3E;&#x7ED9;&#x7236;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;ExtClassLoader&#x53BB;&#x5B8C;&#x6210;&#x3002;</li>
-<li>&#x5F53;ExtClassLoader&#x52A0;&#x8F7D;&#x4E00;&#x4E2A;class&#x65F6;&#xFF0C;&#x5B83;&#x9996;&#x5148;&#x4E5F;&#x4E0D;&#x4F1A;&#x81EA;&#x5DF1;&#x53BB;&#x5C1D;&#x8BD5;&#x52A0;&#x8F7D;&#x8FD9;&#x4E2A;&#x7C7B;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x7C7B;&#x52A0;&#x8F7D;&#x8BF7;&#x6C42;&#x59D4;&#x6D3E;&#x7ED9;BootStrapClassLoader&#x53BB;&#x5B8C;&#x6210;&#x3002;</li>
-<li>&#x5982;&#x679C;BootStrapClassLoader&#x52A0;&#x8F7D;&#x5931;&#x8D25;&#xFF08;&#x4F8B;&#x5982;&#x5728;$JAVA_HOME/jre/lib&#x91CC;&#x672A;&#x67E5;&#x627E;&#x5230;&#x8BE5;class&#xFF09;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;ExtClassLoader&#x6765;&#x5C1D;&#x8BD5;&#x52A0;&#x8F7D;&#xFF1B;</li>
-<li>&#x82E5;ExtClassLoader&#x4E5F;&#x52A0;&#x8F7D;&#x5931;&#x8D25;&#xFF0C;&#x5219;&#x4F1A;&#x4F7F;&#x7528;AppClassLoader&#x6765;&#x52A0;&#x8F7D;&#xFF0C;&#x5982;&#x679C;AppClassLoader&#x4E5F;&#x52A0;&#x8F7D;&#x5931;&#x8D25;&#xFF0C;&#x5219;&#x4F1A;&#x62A5;&#x51FA;&#x5F02;&#x5E38;ClassNotFoundException&#x3002;</li>
-</ul>
-<h2 id="5-&#x5185;&#x5B58;&#x6A21;&#x578B;&#x662F;&#x600E;&#x4E48;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;volatile&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;"><a href="#5-&#x5185;&#x5B58;&#x6A21;&#x578B;&#x662F;&#x600E;&#x4E48;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;volatile&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;" class="headerlink" title="5. &#x5185;&#x5B58;&#x6A21;&#x578B;&#x662F;&#x600E;&#x4E48;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;volatile&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;"></a>5. &#x5185;&#x5B58;&#x6A21;&#x578B;&#x662F;&#x600E;&#x4E48;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;volatile&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
 
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="raft-extended-paper-notes" data-title="《In Search of an Understandable Consensus Algorithm(Extended Version)》阅读笔记" data-url="http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-  
-  
+
+
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -853,8 +787,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

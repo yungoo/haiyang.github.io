@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>兑吧积分商城模式思考 | 技术之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x5151;&amp;#x5427;&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1A;
+ &amp;#x4E00;&amp;#x4E2A;&amp;#x79EF;&amp;#x5206;&amp;#x5151;&amp;#x6362;&amp;#x5546;&amp;#x57CE;SAAS&amp;#x5E73;&amp;#x53F0;
+ &amp;#x4E00;&amp;#x4E2A;B2B2C&amp;#x7684;&amp;#x5E7F;&amp;#x544A;&amp;#x5E73;&amp;#x53F0;
+&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="兑吧积分商城模式思考">
+<meta property="og:url" content="http://yungoo.github.io/2016/08/12/thinking-of-duiba-business/index.html">
+<meta property="og:site_name" content="技术之路">
+<meta property="og:description" content="&amp;#x5151;&amp;#x5427;&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1A;
+ &amp;#x4E00;&amp;#x4E2A;&amp;#x79EF;&amp;#x5206;&amp;#x5151;&amp;#x6362;&amp;#x5546;&amp;#x57CE;SAAS&amp;#x5E73;&amp;#x53F0;
+ &amp;#x4E00;&amp;#x4E2A;B2B2C&amp;#x7684;&amp;#x5E7F;&amp;#x544A;&amp;#x5E73;&amp;#x53F0;
+&amp;">
+<meta property="og:updated_time" content="2016-08-12T02:58:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="兑吧积分商城模式思考">
+<meta name="twitter:description" content="&amp;#x5151;&amp;#x5427;&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1A;
+ &amp;#x4E00;&amp;#x4E2A;&amp;#x79EF;&amp;#x5206;&amp;#x5151;&amp;#x6362;&amp;#x5546;&amp;#x57CE;SAAS&amp;#x5E73;&amp;#x53F0;
+ &amp;#x4E00;&amp;#x4E2A;B2B2C&amp;#x7684;&amp;#x5E7F;&amp;#x544A;&amp;#x5E73;&amp;#x53F0;
+&amp;">
+  
+    <link rel="alternative" href="/atom.xml" title="技术之路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="0" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">haiyang</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yungoo" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/imhaiyang" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/maching-learning/" style="font-size: 10px;">maching-learning</a> <a href="/tags/maching-learning-python-decision-tree/" style="font-size: 10px;">maching-learning python decision-tree</a> <a href="/tags/php-wecenter-notes/" style="font-size: 10px;">php wecenter notes</a> <a href="/tags/raft-algorithm-distribute-system/" style="font-size: 10px;">raft algorithm distribute-system</a> <a href="/tags/raft-plan/" style="font-size: 10px;">raft plan</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">haiyang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img lazy-src="0" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">haiyang</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yungoo" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/imhaiyang" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-thinking-of-duiba-business" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/12/thinking-of-duiba-business/" class="article-date">
+  	<time datetime="2016-08-12T02:57:33.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      兑吧积分商城模式思考
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&#x5151;&#x5427;&#x662F;&#x4EC0;&#x4E48;&#xFF1A;</p>
+<p> &#x4E00;&#x4E2A;&#x79EF;&#x5206;&#x5151;&#x6362;&#x5546;&#x57CE;SAAS&#x5E73;&#x53F0;</p>
+<p> &#x4E00;&#x4E2A;B2B2C&#x7684;&#x5E7F;&#x544A;&#x5E73;&#x53F0;</p>
+<p>&#x5B98;&#x65B9;&#x7F51;&#x7AD9;&#xFF1A;<a href="http://www.duiba.com.cn/" target="_blank" rel="external">http://www.duiba.com.cn/</a></p>
+</blockquote>
+<h2 id="&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x4EA7;&#x54C1;&#x6A21;&#x578B;"><a href="#&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x4EA7;&#x54C1;&#x6A21;&#x578B;" class="headerlink" title="&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x4EA7;&#x54C1;&#x6A21;&#x578B;"></a>&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x4EA7;&#x54C1;&#x6A21;&#x578B;</h2><p>&#x5546;&#x5BB6;&#xFF1A;&#x6709;&#x5546;&#x54C1;&#x9500;&#x552E;&#x6216;&#x5E7F;&#x544A;&#x66DD;&#x5149;&#x9700;&#x6C42;&#x7684;&#x539F;&#x5382;&#x3002;</p>
+<p>&#x5BA2;&#x6237;&#xFF1A;&#x6709;&#x5B8C;&#x5584;&#x7684;<code>&#x79EF;&#x5206;&#x4F53;&#x7CFB;</code>&#x7684;&#x5927;&#x4E2D;&#x5C0F;&#x578B;&#x5E94;&#x7528;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#xFF1A;&#x79EF;&#x5206;&#x5151;&#x6362;&#x670D;&#x52A1;&#xFF08;&#x4F18;&#x60E0;&#x5238;&#x3001;&#x5546;&#x54C1;&#x3001;&#x5145;&#x503C;&#x3001;&#x6D3B;&#x52A8;)&#xFF0C;&#x4EE5;&#x53CA;&#x8FD0;&#x8425;&#x652F;&#x6301;&#x3002;</p>
+<p>&#x4EA7;&#x54C1;&#xFF1A;&#x4E2A;&#x6027;&#x5316;H5&#x3001;SDK&#x3001;&#x5956;&#x54C1;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x3001;&#x6D3B;&#x52A8;&#x5DE5;&#x5177;&#xFF08;&#x62BD;&#x5956;&#x3001;&#x522E;&#x522E;&#x4E50;&#x3001;&#x6447;&#x4E00;&#x6447;&#xFF09;&#x8FD0;&#x8425;&#x7EDF;&#x8BA1;&#x62A5;&#x8868;&#x540E;&#x53F0;&#x3002;</p>
+<p>H5&#xFF1A;&#x5FEB;&#x901F;&#x63A5;&#x5165;</p>
+<p>SDK&#xFF1A;&#x6DF1;&#x5EA6;&#x5B9A;&#x5236;</p>
+<p>&#x79EF;&#x5206;&#x7684;&#x6027;&#x8D28;&#xFF1A;</p>
+<ul>
+<li>&#x79EF;&#x5206;&#x7684;&#x83B7;&#x53D6;&#x5177;&#x6709;&#x6FC0;&#x52B1;&#x6027;&#x8D28;</li>
+<li>&#x6709;&#x4EE3;&#x507F;&#x673A;&#x5236;&#xFF1A;&#x901A;&#x8FC7;&#x5404;&#x79CD;&#x9014;&#x5F84;&#x83B7;&#x53D6;&#x79EF;&#x5206;&#xFF0C;&#x600E;&#x6837;&#x6D88;&#x8D39;&#x79EF;&#x5206;</li>
+<li>&#x79EF;&#x5206;&#x7684;&#x6548;&#x7528;&#x6E90;&#x81EA;&#x7528;&#x6237;&#x4E8E;&#x5BF9;&#x79EF;&#x5206;&#x6D88;&#x8D39;&#x5FC3;&#x7406;&#x4EF7;&#x503C;</li>
+</ul>
+<p>&#x7528;&#x6237;&#x7684;&#x8BC9;&#x6C42;&#xFF1A;</p>
+<ul>
+<li>&#x7528;&#x79EF;&#x5206;&#x6362;&#x5230;&#x5FC3;&#x4EEA;&#x7684;&#x5546;&#x54C1;&#x6216;&#x670D;&#x52A1;</li>
+<li>&#x6709;&#x8F83;&#x597D;&#x7684;&#x7528;&#x6237;&#x4F53;&#x9A8C;</li>
+</ul>
+<p>&#x5BA2;&#x6237;&#x7684;&#x8BC9;&#x6C42;&#xFF1A;</p>
+<ul>
+<li>&#x4EE5;&#x8F83;&#x9AD8;&#x7684;&#x79EF;&#x5206;&#x6548;&#x7528;&#x4FC3;&#x8FDB;&#x79EF;&#x5206;&#x7684;&#x6D88;&#x8D39;&#xFF0C;&#x4FDD;&#x8BC1;&#x79EF;&#x5206;&#x4EE3;&#x507F;&#x673A;&#x5236;&#x9AD8;&#x6548;&#x8FD0;&#x884C;</li>
+<li>&#x7EF4;&#x6301;&#x8F83;&#x4F4E;&#x8FD0;&#x8425;&#x8D39;&#x7528;</li>
+<li>&#x8FD0;&#x8425;&#x80FD;&#x529B;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x7528;&#x6237;&#x91CF;&#x4E0A;&#x5347;&#x4F9D;&#x7136;&#x6709;&#x8F83;&#x597D;&#x7684;&#x670D;&#x52A1;&#x8D28;&#x91CF;</li>
+</ul>
+<p>&#x5546;&#x5BB6;&#x8BC9;&#x6C42;&#xFF1A;</p>
+<ul>
+<li>&#x5546;&#x54C1;&#x9500;&#x552E;</li>
+<li>&#x4F4E;&#x6210;&#x672C;&#x9AD8;&#x6548;&#x5E7F;&#x544A;&#xFF08;&#x9AD8;&#x8F6C;&#x5316;&#x7387;&#xFF09;</li>
+<li>&#x63D0;&#x5347;&#x54C1;&#x724C;&#x66DD;&#x5149;&#x5EA6;</li>
+</ul>
+<p>&#x4EA7;&#x54C1;&#x6838;&#x5FC3;&#x4EF7;&#x503C;&#xFF1A;</p>
+<ol>
+<li>&#x8BA9;&#x79EF;&#x5206;&#x66F4;&#x6709;&#x6709;&#x4EF7;&#x503C;</li>
+<li>&#x8BA9;&#x79EF;&#x5206;&#x6362;&#x5230;&#x8BA9;&#x7528;&#x6237;&#x5FC3;&#x52A8;&#x7684;&#x4E1C;&#x897F;</li>
+<li>&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x79EF;&#x5206;&#x5546;&#x57CE;</li>
+<li>&#x4F4E;(&#x96F6;)&#x6210;&#x672C;&#x8FD0;&#x8425;&#x79EF;&#x5206;&#x4F53;&#x7CFB;</li>
+<li>&#x53CB;&#x597D;&#x7684;&#x8FD0;&#x8425;&#x5DE5;&#x5177;</li>
+</ol>
+<p>&#x4EA7;&#x54C1;&#x601D;&#x8DEF;&#xFF1A;</p>
+<ul>
+<li>&#x901A;&#x8FC7;H5&#x548C;&#x8FD0;&#x7528;&#x5DE5;&#x5177;&#x6765;&#x505A;&#x5230;(3)(5)</li>
+<li>&#x901A;&#x8FC7;&#x5E73;&#x53F0;&#x63D0;&#x4F9B;&#x7684;&#x8FD0;&#x8425;&#x80FD;&#x529B;&#x505A;&#x5230;(4)</li>
+<li>&#x901A;&#x8FC7;&#x4E2A;&#x6027;&#x5316;&#x5546;&#x54C1;&#x63A8;&#x8350;&#x7CFB;&#x7EDF;&#x505A;&#x7684;(2)</li>
+<li>&#x6700;&#x96BE;&#x7684;&#x662F;(1)</li>
+</ul>
+<p>&#x5B58;&#x7684;&#x95EE;&#x9898;&#xFF1A;</p>
+<ul>
+<li>&#x5E73;&#x53F0;&#x65E0;&#x6CD5;&#x4E3B;&#x52A8;&#x52FE;&#x642D;&#x7528;&#x6237;</li>
+<li>&#x7528;&#x6237;&#x7684;&#x57FA;&#x7840;&#x6570;&#x636E;&#x96BE;&#x4E8E;&#x6D41;&#x5165;&#x5E73;&#x53F0;</li>
+</ul>
+<h2 id="&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x5546;&#x4E1A;&#x6A21;&#x5F0F;"><a href="#&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x5546;&#x4E1A;&#x6A21;&#x5F0F;" class="headerlink" title="&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x5546;&#x4E1A;&#x6A21;&#x5F0F;"></a>&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x5546;&#x4E1A;&#x6A21;&#x5F0F;</h2><p>&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x7684;&#x76C8;&#x5229;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li>&#x4F4E;&#x6210;&#x672C;&#x91C7;&#x8D2D;&#x5E76;&#x6EA2;&#x4EF7;&#x5356;&#x7ED9;&#x7528;&#x6237;&#x6216;&#x5BA2;&#x6237;&#xFF0C;&#x8D5A;&#x53D6;&#x5DEE;&#x4EF7;</li>
+<li>&#x6309;&#x5355;&#x5411;&#x5546;&#x5BB6;&#x6536;&#x53D6;&#x670D;&#x52A1;&#x8D39;</li>
+<li>&#x6309;&#x66DD;&#x5149;&#x91CF;&#x5411;&#x5546;&#x5BB6;&#x6536;&#x53D6;&#x5E7F;&#x544A;&#x8D39;</li>
+<li>&#x62D3;&#x5C55;&#x5546;&#x57CE;&#x5E7F;&#x544A;&#xFF0C;&#x4E0E;&#x5BA2;&#x6237;&#x8FDB;&#x884C;&#x5E7F;&#x544A;&#x5206;&#x6210;</li>
+<li>&#x79EF;&#x7D2F;&#x4EA4;&#x6613;&#x548C;&#x7528;&#x6237;&#x884C;&#x4E3A;&#x6570;&#x636E;&#x540E;&#xFF0C;&#x5C06;&#x7528;&#x6237;&#x5206;&#x7C7B;&#x4FE1;&#x606F;&#x5F00;&#x653E;&#x7ED9;&#x5E7F;&#x544A;&#x4F01;&#x4E1A;&#xFF0C;&#x6536;&#x53D6;&#x6280;&#x672F;&#x670D;&#x52A1;&#x8D39;</li>
+</ul>
+<p>&#x5B58;&#x5728;&#x7684;&#x95EE;&#x9898;&#xFF1A;</p>
+<ul>
+<li>&#x5929;&#x7136;&#x5927;&#x5BA2;&#x6237;&#x503E;&#x5411;&#x6027;&#xFF0C;&#x5BA2;&#x6237;&#x7684;&#x7528;&#x6237;&#x91CF;&#x548C;&#x6D41;&#x91CF;&#x7EA7;&#x522B;&#x5DEE;&#x522B;&#x5DE8;&#x5927;&#xFF0C;&#x4E1A;&#x52A1;&#x89C4;&#x6A21;&#x53EF;&#x80FD;&#x4F1A;&#x4E25;&#x91CD;&#x4F9D;&#x8D56;&#x5927;&#x5BA2;&#x6237;&#xFF1B;</li>
+<li>&#x96BE;&#x4E8E;&#x4FDD;&#x6301;&#x91C7;&#x8D2D;&#x7684;&#x5546;&#x54C1;&#x4E0E;&#x7528;&#x6237;&#x7684;&#x9700;&#x6C42;&#x9AD8;&#x5EA6;&#x5339;&#x914D;</li>
+</ul>
+<h2 id="&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x8FD0;&#x8425;&#x7B56;&#x7565;"><a href="#&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x8FD0;&#x8425;&#x7B56;&#x7565;" class="headerlink" title="&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x8FD0;&#x8425;&#x7B56;&#x7565;"></a>&#x79EF;&#x5206;&#x5546;&#x57CE;&#x7684;&#x8FD0;&#x8425;&#x7B56;&#x7565;</h2><ul>
+<li>&#x591A;&#x63A5;&#x5E94;&#x7528;</li>
+<li>&#x91C7;&#x8D2D;&#x9AD8;&#x8D28;&#x91CF;&#x7684;&#x5546;&#x54C1;&#x6216;&#x670D;&#x52A1;</li>
+<li>&#x4FDD;&#x6301;&#x5546;&#x54C1;&#x7684;&#x91C7;&#x8D2D;&#x3001;&#x53D1;&#x8D27;&#x3001;&#x552E;&#x540E;&#x7684;&#x8FD0;&#x8425;&#x9AD8;&#x6548;&#x7387;&#x8FD0;&#x884C;</li>
+</ul>
+<p>&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x7684;&#x95EE;&#x9898;&#xFF1A;</p>
+<ul>
+<li>&#x4E1A;&#x52A1;&#x91C7;&#x8D2D;&#x3001;&#x53D1;&#x8D27;&#x3001;&#x552E;&#x540E;&#x76F8;&#x5F53;&#x4E8E;&#x5916;&#x5305;&#x7ED9;&#x4E86;&#x5E73;&#x53F0;&#xFF0C;&#x7528;&#x6237;&#x65E0;&#x6CD5;&#x611F;&#x77E5;&#xFF0C;&#x9700;&#x8981;&#x591A;&#x65B9;&#x6C9F;&#x901A;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x6548;&#x7387;&#x4F4E;&#xFF0C;&#x6C9F;&#x901A;&#x7E41;&#x7410;&#x3002;</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/12/stage-of-k12-education/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          关于K12教育类产品的现状和发展
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/12/raft-learning-plan/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Raft学习计划</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="thinking-of-duiba-business" data-title="兑吧积分商城模式思考" data-url="http://yungoo.github.io/2016/08/12/thinking-of-duiba-business/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 haiyang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: /
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

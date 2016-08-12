@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>《决策树算法的Python实现》笔记 | 技术之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x53C2;&amp;#x7167;&amp;#xFF1A;
+[1]: https://zhuanlan.zhihu.com/p/20794583 &amp;#x201C;&amp;#x51B3;&amp;#x7B56;&amp;#x6811;&amp;#x7B97;&amp;#x6CD5;&amp;#x7684;Python&amp;#x5B9E;&amp;#x73B0;&amp;#x201D;
+[2]: http://m.blog.csdn.net/article/details?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《决策树算法的Python实现》笔记">
+<meta property="og:url" content="http://yungoo.github.io/2016/08/12/decision-tree-implement-in-python-notes/index.html">
+<meta property="og:site_name" content="技术之路">
+<meta property="og:description" content="&amp;#x53C2;&amp;#x7167;&amp;#xFF1A;
+[1]: https://zhuanlan.zhihu.com/p/20794583 &amp;#x201C;&amp;#x51B3;&amp;#x7B56;&amp;#x6811;&amp;#x7B97;&amp;#x6CD5;&amp;#x7684;Python&amp;#x5B9E;&amp;#x73B0;&amp;#x201D;
+[2]: http://m.blog.csdn.net/article/details?">
+<meta property="og:updated_time" content="2016-08-12T03:11:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《决策树算法的Python实现》笔记">
+<meta name="twitter:description" content="&amp;#x53C2;&amp;#x7167;&amp;#xFF1A;
+[1]: https://zhuanlan.zhihu.com/p/20794583 &amp;#x201C;&amp;#x51B3;&amp;#x7B56;&amp;#x6811;&amp;#x7B97;&amp;#x6CD5;&amp;#x7684;Python&amp;#x5B9E;&amp;#x73B0;&amp;#x201D;
+[2]: http://m.blog.csdn.net/article/details?">
+  
+    <link rel="alternative" href="/atom.xml" title="技术之路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="0" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">haiyang</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yungoo" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/imhaiyang" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/maching-learning/" style="font-size: 10px;">maching-learning</a> <a href="/tags/maching-learning-python-decision-tree/" style="font-size: 10px;">maching-learning python decision-tree</a> <a href="/tags/php-wecenter-notes/" style="font-size: 10px;">php wecenter notes</a> <a href="/tags/raft-algorithm-distribute-system/" style="font-size: 10px;">raft algorithm distribute-system</a> <a href="/tags/raft-plan/" style="font-size: 10px;">raft plan</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">haiyang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img lazy-src="0" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">haiyang</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yungoo" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/imhaiyang" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-decision-tree-implement-in-python-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/12/decision-tree-implement-in-python-notes/" class="article-date">
+  	<time datetime="2016-08-12T03:10:13.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《决策树算法的Python实现》笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maching-learning-python-decision-tree/">maching-learning python decision-tree</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&#x53C2;&#x7167;&#xFF1A;</p>
+<p>[1]: <a href="https://zhuanlan.zhihu.com/p/20794583" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/20794583</a> &#x201C;&#x51B3;&#x7B56;&#x6811;&#x7B97;&#x6CD5;&#x7684;Python&#x5B9E;&#x73B0;&#x201D;</p>
+<p>[2]: <a href="http://m.blog.csdn.net/article/details?id=51344905" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=51344905</a> &#x201C;&#x51B3;&#x7B56;&#x6811;&#x7684;&#x751F;&#x6210;&#x4E0E;&#x526A;&#x679D;&#x201D;</p>
+<p>[3]: <a href="http://www.chawenti.com/articles/18892.html" target="_blank" rel="external">http://www.chawenti.com/articles/18892.html</a> &#x201C;&#x51B3;&#x7B56;&#x6811;&#x5206;&#x7C7B;&#x7B97;&#x6CD5;&#x201D;</p>
+<p>[4]: <a href="http://www.cnblogs.com/zhangchaoyang/articles/2709922.html" target="_blank" rel="external">http://www.cnblogs.com/zhangchaoyang/articles/2709922.html</a> &#x201C;&#x51B3;&#x7B56;&#x6811;CART&#x201D;</p>
+<p>&#x51B3;&#x7B56;&#x6811;&#x662F;&#x4E00;&#x79CD;&#x57FA;&#x672C;&#x7684;<code>&#x5206;&#x7C7B;</code>&#x4E0E;<code>&#x56DE;&#x5F52;</code>&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x770B;&#x4F5C;if-then&#x89C4;&#x5219;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x662F;&#x5B9A;&#x4E49;&#x5728;<code>&#x7279;&#x5F81;&#x7A7A;&#x95F4;</code>&#x4E0E;<code>&#x7C7B;&#x7A7A;&#x95F4;</code>&#x4E0A;&#x7684;<code>&#x6761;&#x4EF6;&#x6982;&#x7387;&#x5206;&#x5E03;</code></p>
+</blockquote>
+<p>&#x6027;&#x8D28;: &#x6BCF;&#x4E00;&#x4E2A;&#x6837;&#x672C;&#x80FD;&#x4E14;&#x53EA;&#x80FD;&#x88AB;&#x4E00;&#x6761;&#x8DEF;&#x5F84;&#x6240;&#x8986;&#x76D6;</p>
+<p>&#x4F18;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x76F4;&#x89C2;&#x3001;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#x3001;&#x7B26;&#x5408;&#x4EBA;&#x7C7B;&#x601D;&#x7EF4;&#x4E60;&#x60EF;</li>
+<li>&#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6811;&#x7684;&#x5F62;&#x5F0F;&#x53EF;&#x89C6;&#x5316;&#x5C55;&#x793A;</li>
+<li>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5904;&#x7406;&#x975E;&#x6570;&#x503C;&#x6570;&#x636E;</li>
+</ul>
+<p>&#x7F3A;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x5BF9;&#x4E8E;&#x6709;&#x5927;&#x91CF;&#x6570;&#x503C;&#x8F93;&#x5165;&#x548C;&#x8F93;&#x51FA;&#x95EE;&#x9898;&#xFF0C;&#x672A;&#x5FC5;&#x662F;&#x597D;&#x7684;&#x9009;&#x62E9;</li>
+<li>&#x4E0D;&#x9002;&#x5408;&#x53D8;&#x91CF;&#x5173;&#x7CFB;&#x590D;&#x6742;&#x7684;&#x6A21;&#x578B;</li>
+<li>&#x4E0D;&#x9002;&#x5408;&#x591A;&#x53D8;&#x91CF;&#x590D;&#x6742;&#x7EC4;&#x5408;&#x7684;&#x5206;&#x7C7B;&#x6A21;&#x578B;</li>
+<li>&#x6A21;&#x578B;&#x4E0D;&#x7A33;&#x5065;&#xFF0C;&#x8282;&#x70B9;&#x5C0F;&#x53D8;&#x5316;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x6574;&#x9897;&#x6811;&#x5927;&#x53D8;&#x5316;</li>
+</ul>
+<p>&#x7B97;&#x6CD5;&#x6784;&#x6210;&#xFF1A;</p>
+<ul>
+<li>&#x7279;&#x5F81;&#x9009;&#x62E9;</li>
+<li>&#x51B3;&#x7B56;&#x6811;&#x751F;&#x6210;</li>
+<li>&#x51B3;&#x7B56;&#x6811;&#x526A;&#x679D;</li>
+</ul>
+<p>if-then&#x89C4;&#x5219;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<ol>
+<li>&#x7531;&#x4ECE;&#x6839;&#x8282;&#x70B9;&#x5230;&#x53F6;&#x5B50;&#x7684;&#x6BCF;&#x4E00;&#x5929;&#x8DEF;&#x5F84;&#x6784;&#x5EFA;&#x4E00;&#x6761;&#x89C4;&#x5219;</li>
+<li>&#x8DEF;&#x5F84;&#x5185;&#x8282;&#x70B9;&#x7684;&#x7279;&#x5F81;&#x5BF9;&#x5E94;&#x89C4;&#x5219;&#x7684;&#x6761;&#x4EF6;</li>
+<li>&#x53F6;&#x5B50;&#x7684;&#x7C7B;&#x6700;&#x4E3A;&#x89C4;&#x5219;&#x7ED3;&#x8BBA;</li>
+</ol>
+<p>&#x76F8;&#x5173;&#x7B97;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li>Bagging</li>
+<li>&#x968F;&#x673A;&#x68EE;&#x6797;</li>
+<li>Boosting</li>
+</ul>
+<h2 id="&#x7279;&#x5F81;&#x9009;&#x62E9;"><a href="#&#x7279;&#x5F81;&#x9009;&#x62E9;" class="headerlink" title="&#x7279;&#x5F81;&#x9009;&#x62E9;"></a>&#x7279;&#x5F81;&#x9009;&#x62E9;</h2><p>&#x5224;&#x65AD;&#x7279;&#x5F81;&#x5206;&#x7C7B;&#x80FD;&#x529B;&#x7684;&#x51C6;&#x5219;</p>
+<blockquote>
+<p>&#x5BF9;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;D&#xFF0C;&#x8BA1;&#x7B97;&#x5176;&#x6BCF;&#x4E2A;&#x7279;&#x5F81;&#x7684;&#x4FE1;&#x606F;&#x589E;&#x76CA;&#xFF0F;&#x589E;&#x76CA;&#x6BD4;&#xFF0C;&#x5E76;&#x6BD4;&#x8F83;&#x5B83;&#x4EEC;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x4ECE;&#x800C;&#x9009;&#x62E9;&#x4FE1;&#x606F;&#x589E;&#x76CA;&#x6700;&#x5927;&#x7684;&#x7279;&#x5F81;&#x3002;</p>
+</blockquote>
+<p>&#x4FE1;&#x606F;&#x589E;&#x76CA;&#xFF1A;</p>
+<p>\[g(D, A) = H(D) - H(D | A) \]</p>
+<p>&#x6761;&#x4EF6;&#x589E;&#x76CA;&#xFF1A;</p>
+<p>\[g_R(D|A) = \frac{g(D, A)}{H_A(D)}\]</p>
+<p>&#x5176;&#x4E2D;&#xFF1A;<br>\[ \begin{aligned}<br>&amp; H(D) =  -\sum_{k = 1}^K  \frac{|C_k|}{|D|} log\frac{|C<em>k|}{|D|} \\<br>&amp; H(D|A) = -\sum\</em>{i = 1}^n\frac{|D_i|}{|D|} H(D_i) = -\sum_{i = 1}^n\frac{|D_i|}{|D|} \sum_{k=1}^K \frac{|D_{ik}|}{|D_i|} log\frac{|D_{ik}|}{|D_i|} \\<br>&amp; H<em>A(D) = -\sum\</em>{i = 1}^n \frac{|D_i|}{|D|} log\frac{|D_i|}{|D|} \\<br>&amp; D &#x4E3A;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x6837;&#x672C;&#x5BB9;&#x91CF;&#x4E3A; |D| \\<br>&amp; &#x6700;&#x7EC8;&#x5206;&#x4E3A;K&#x4E2A;&#x7C7B;&#x522B;C_k&#xFF0C;&#x5404;&#x7C7B;&#x522B;&#x6837;&#x672C;&#x4E2A;&#x6570;|C_k| \\<br>&amp; &#x67D0;&#x4E00;&#x7279;&#x5F81;A&#x6709;n&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x53D6;&#x503C;a_1,a_2,&#x2026;,a_n \\<br>&amp; D&#x6839;&#x636E;&#x7279;&#x5F81;A&#x7684;&#x53D6;&#x503C;&#x53EF;&#x5C06;&#x6570;&#x636E;&#x96C6;D&#x5212;&#x5206;&#x4E3A;n&#x4E2A;&#x5B50;&#x96C6;D_1,D_2,&#x2026;,D_n, |D_i|&#x4E3A;D_i&#x7684;&#x6837;&#x672C;&#x4E2A;&#x6570; \\<br>&amp; &#x5B50;&#x96C6;D_i&#x4E2D;&#x5C5E;&#x4E8E;&#x7C7B;C_k&#x4E2D;&#x7684;&#x6837;&#x672C;&#x96C6;&#x5408;&#x4E3A;D_{ik}&#xFF0C;&#x5176;&#x6837;&#x672C;&#x4E2A;&#x6570;&#x4E3A;|D_{ik}| \\<br>\end{aligned} \]</p>
+<blockquote>
+<p>&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF1A;</p>
+<p>&#x8BBE;X&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x9650;&#x72B6;&#x6001;&#x7684;&#x79BB;&#x6563;&#x578B;&#x968F;&#x673A;&#x53D8;&#x91CF;&#xFF0C;&#x5176;&#x6982;&#x7387;&#x5206;&#x5E03;&#x4E3A;</p>
+<p>\[P(X = x_i) = p_i, i = 1, 2,&#x2026;,n\]<br>&#x71B5;&#xFF1A;&#x71B5;(entropy)&#x7528;&#x4E8E;&#x8868;&#x793A;<strong>&#x968F;&#x673A;&#x53D8;&#x91CF;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x7684;&#x5EA6;&#x91CF;</strong>&#xFF0C;&#x71B5;&#x8D8A;&#x5927;&#xFF0C;&#x5219;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x8D8A;&#x5927;&#x3002;</p>
+<p>\[ H\left(X\right) = -\sum_{x = 1}^n p_i log\left(p_i \right)\]</p>
+<p>&#x6761;&#x4EF6;&#x71B5;&#xFF1A;&#x5F97;&#x77E5;&#x7279;&#x5F81;X&#x7684;&#x4FE1;&#x606F;&#x800C;&#x4F7F;&#x5F97;&#x7C7B;Y&#x7684;&#x4FE1;&#x606F;&#x7684;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x51CF;&#x5C11;&#x7684;&#x7A0B;&#x5EA6;<br>\[ H(Y\,|\,X) = \sum_{i = 1}^n p_i\,H(Y\,|\,X = x_i)\]</p>
+</blockquote>
+<h2 id="&#x51B3;&#x7B56;&#x6811;&#x751F;&#x6210;"><a href="#&#x51B3;&#x7B56;&#x6811;&#x751F;&#x6210;" class="headerlink" title="&#x51B3;&#x7B56;&#x6811;&#x751F;&#x6210;"></a>&#x51B3;&#x7B56;&#x6811;&#x751F;&#x6210;</h2><p>&#x5B9E;&#x73B0;&#x7B97;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li>ID3</li>
+<li>C4.5</li>
+<li>CART</li>
+</ul>
+<h3 id="ID3-amp-C4-5"><a href="#ID3-amp-C4-5" class="headerlink" title="ID3&amp;C4.5"></a>ID3&amp;C4.5</h3><ol>
+<li>&#x4ECE;&#x6839;&#x8282;&#x70B9;&#x5F00;&#x59CB;&#xFF0C;&#x5BF9;&#x5404;&#x8282;&#x70B9;&#x8BA1;&#x7B97;&#x6240;&#x6709;&#x7279;&#x5F81;&#x7684;&#x4FE1;&#x606F;&#x589E;&#x76CA;&#xFF08;C4.5&#x8BA1;&#x7B97;&#x589E;&#x76CA;&#x6BD4;&#x4F8B;&#xFF09;&#xFF0C;&#x9009;&#x62E9;&#x589E;&#x76CA;&#x6700;&#x5927;&#xFF08;C4.5&#x589E;&#x76CA;&#x6BD4;&#x4F8B;&#x6700;&#x5927;&#xFF09;&#x7684;&#x7279;&#x5F81;&#x4F5C;&#x4E3A;&#x8282;&#x70B9;&#x7279;&#x5F81;&#xFF0C;&#x5E76;&#x7531;&#x8BE5;&#x7279;&#x5F81;&#x7684;&#x4E0D;&#x540C;&#x53D6;&#x503C;&#xFF08;&#x6839;&#x636E;&#x7279;&#x5F81;&#x5206;&#x7C7B;&#x7684;&#x6837;&#x672C;&#x5B50;&#x96C6;&#xFF09;&#x6784;&#x5EFA;&#x5B50;&#x8282;&#x70B9;</li>
+<li>&#x5BF9;&#x5B50;&#x8282;&#x70B9;&#x9012;&#x5F52;&#x8C03;&#x7814;&#x6267;&#x884C;1(&#x6837;&#x672C;)&#xFF0C;&#x6784;&#x5EFA;&#x51B3;&#x7B56;&#x6811;</li>
+<li>&#x76F4;&#x5230;&#x6240;&#x6709;&#x7279;&#x5F81;&#x7684;&#x589E;&#x76CA;&#x4FE1;&#x606F;&#x5747;&#x5F88;&#x5C0F;&#x6216;&#x8005;&#x6CA1;&#x6709;&#x7279;&#x5F81;&#x53EF;&#x9009;&#x4E3A;&#x6B62;</li>
+</ol>
+<h3 id="Classification-and-Regression-Tree-CART"><a href="#Classification-and-Regression-Tree-CART" class="headerlink" title="Classification and Regression Tree(CART)"></a>Classification and Regression Tree(CART)</h3><p>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x4E8C;&#x53C9;&#x51B3;&#x7B56;&#x6811;&#xFF0C;&#x9012;&#x5F52;&#x4E8C;&#x5206;&#x6BCF;&#x4E2A;&#x7279;&#x5F81;&#xFF0C;&#x5C06;&#x7279;&#x5F81;&#x7A7A;&#x95F4;&#x5212;&#x5206;&#x4E3A;&#x6709;&#x9650;&#x4E2A;&#x5355;&#x5143;&#xFF0C;&#x5E76;&#x5728;&#x8FD9;&#x4E9B;&#x5355;&#x5143;&#x786E;&#x5B9A;&#x9884;&#x6D4B;&#x7684;&#x6982;&#x7387;&#x5206;&#x5E03;&#x3002;</p>
+<ul>
+<li>&#x91C7;&#x7528;<code>&#x5E73;&#x65B9;&#x8BEF;&#x5DEE;</code>&#x6700;&#x5C0F;&#x5316;&#x51C6;&#x5219;&#x6765;&#x8BC4;&#x4EF7;&#x56DE;&#x5F52;&#x6811;&#x7684;&#x9884;&#x6D4B;&#x8BEF;&#x5DEE;</li>
+<li>&#x91C7;&#x7528;<code>&#x57FA;&#x5C3C;&#x6307;&#x6570;</code>&#x6700;&#x5C0F;&#x5316;&#x51C6;&#x5219;&#x6765;&#x8BC4;&#x4EF7;&#x5206;&#x7C7B;&#x6811;&#x7684;&#x5206;&#x7C7B;&#x80FD;&#x529B;</li>
+</ul>
+<p>&#x57FA;&#x5C3C;&#x6307;&#x6570;&#xFF1A;</p>
+<p>\[ Gini(p) = \sum_{k=1}^K p_k (1 - p_k) = 1 - \sum_{k=1}^K p_k^2 \]</p>
+<p>&#x5176;&#x4E2D;&#xFF1A;</p>
+<p>\[<br>K &#x4E3A;&#x7C7B;&#x522B;&#x4E2A;&#x6570;&#xFF0C;P_k&#x4E3A;&#x6837;&#x672C;&#x5C5E;&#x4E8E;C_k&#x7684;&#x6982;&#x7387;<br>\]</p>
+<p>&#x5BF9;&#x4E8E;&#x4E8C;&#x7C7B;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#xFF0C;&#x57FA;&#x5C3C;&#x6307;&#x6570;&#x4E3A;&#xFF1A;</p>
+<p>\[ Gini(p) = 2p(1-p)\]</p>
+<p>&#x5176;&#x4E2D;&#xFF1A;<br>\[<br>p&#x4E3A;&#x6837;&#x672C;&#x5C5E;&#x4E8E;&#x5206;&#x7C7B;1&#x7684;&#x6982;&#x7387;<br>\]</p>
+<h3 id="&#x5907;&#x6CE8;"><a href="#&#x5907;&#x6CE8;" class="headerlink" title="&#x5907;&#x6CE8;"></a>&#x5907;&#x6CE8;</h3><p>&#x8BA1;&#x7B97;&#x7684;&#x6570;&#x636E;&#x7EA6;&#x5B9A;&#xFF1A;</p>
+<ul>
+<li>&#x6BCF;&#x884C;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6837;&#x672C;&#x6570;&#x636E;</li>
+<li>&#x6BCF;&#x5217;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6837;&#x672C;&#x7279;&#x5F81;</li>
+</ul>
+<p>&#x4E8C;&#x53C9;&#x51B3;&#x7B56;&#x6811;&#x7684;&#x7ED3;&#x6784;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x5B57;&#x6BB5;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col</td>
+<td>&#x5F85;&#x68C0;&#x9A8C;&#x7684;&#x5224;&#x65AD;&#x6761;&#x4EF6;&#x6240;&#x5BF9;&#x5E94;&#x7684;&#x5217;&#x7D22;&#x5F15;&#x503C;</td>
+</tr>
+<tr>
+<td>value</td>
+<td>&#x5BF9;&#x5E94;&#x4E8E;&#x4E3A;&#x4E86;&#x4F7F;&#x7ED3;&#x679C;&#x4E3A;True&#xFF0C;&#x5F53;&#x524D;&#x5217;&#x5FC5;&#x987B;&#x5339;&#x914D;&#x7684;&#x503C;</td>
+</tr>
+<tr>
+<td>results</td>
+<td>&#x4FDD;&#x5B58;&#x7684;&#x662F;&#x9488;&#x5BF9;&#x5F53;&#x524D;&#x5206;&#x652F;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x5178;</td>
+</tr>
+<tr>
+<td>tb</td>
+<td>&#x5BF9;&#x5E94;&#x4E8E;&#x7ED3;&#x679C;&#x4E3A;true&#x65F6;&#xFF0C;&#x76F8;&#x5BF9;&#x4E8E;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x7684;&#x5B50;&#x6811;&#x4E0A;&#x7684;&#x8282;&#x70B9;</td>
+</tr>
+<tr>
+<td>fb</td>
+<td>&#x5BF9;&#x5E94;&#x4E8E;&#x7ED3;&#x679C;&#x4E3A;false&#x65F6;&#xFF0C;&#x76F8;&#x5BF9;&#x4E8E;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x7684;&#x5B50;&#x6811;&#x4E0A;&#x7684;&#x8282;&#x70B9;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x51B3;&#x7B56;&#x6811;&#x7684;&#x526A;&#x679D;"><a href="#&#x51B3;&#x7B56;&#x6811;&#x7684;&#x526A;&#x679D;" class="headerlink" title="&#x51B3;&#x7B56;&#x6811;&#x7684;&#x526A;&#x679D;"></a>&#x51B3;&#x7B56;&#x6811;&#x7684;&#x526A;&#x679D;</h2><p>&#x51B3;&#x7B56;&#x6811;&#x526A;&#x679D;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF1A;</p>
+<p>\[C_\alpha(T) = F(T) + C(T) = \sum_{t=1}^{|T|} N_t H_t(T) + \alpha\,|T| \]</p>
+<p>&#x62DF;&#x5408;&#x5EA6;&#xFF1A;</p>
+<p>\[F(T) = \sum_{t=1}^{|T|} N_t H_t(T) \]</p>
+<p>&#x6A21;&#x578B;&#x590D;&#x6742;&#x5EA6;&#x60E9;&#x7F5A;&#xFF1A;</p>
+<p>\[C(T) = \alpha\,|T|\]</p>
+<p>&#x67D0;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x7ECF;&#x9A8C;&#x71B5;&#xFF1A;</p>
+<p>\[H_t(T) = -\sum_{k=1}^K \frac{N_{tk}}{N_t} log(\frac{N_{tk}}{N_t})\]</p>
+<p>&#x5176;&#x4E2D;&#xFF1A;</p>
+<p>\[ \begin{aligned}<br>T&#xFF1A;&amp; &#x51B3;&#x7B56;&#x6811; \\<br>|T|&#xFF1A;&amp; &#x51B3;&#x7B56;&#x6811;T&#x7684;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x4E2A;&#x6570;\\<br>t&#xFF1A;&amp; &#x6811;T&#x7684;&#x67D0;&#x53F6;&#x5B50;&#x8282;&#x70B9; \\<br>N_t&#xFF1A;&amp; &#x8BE5;&#x53F6;&#x5B50;&#x7684;&#x6837;&#x672C;&#x4E2A;&#x6570; \\<br>N_{tk}&#xFF1A;&amp; &#x53F6;&#x5B50;&#x8282;&#x70B9;t&#x4E2D;k&#x7C7B;&#x6837;&#x672C;&#x4E2A;&#x6570;,k&#xFF1D;1,2,&#x2026;,K \\<br>\alpha&#xFF1A;&amp; &#x6A21;&#x578B;&#x590D;&#x6742;&#x5EA6;&#x7684;&#x6298;&#x8877;&#x56E0;&#x5B50; \\<br>\end{aligned}\]</p>
+<p>&#x7B97;&#x6CD5;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<ol>
+<li>&#x8BA1;&#x7B97;&#x5404;&#x8282;&#x70B9;&#x7684;&#x7ECF;&#x9A8C;&#x71B5;</li>
+<li>&#x9012;&#x5F52;&#x5730;&#x4ECE;&#x53F6;&#x5B50;&#x5411;&#x4E0A;&#x56DE;&#x6EAF;&#xFF0C;&#x5982;&#x679C;&#x5C06;&#x67D0;&#x8282;&#x70B9;&#x548C;&#x6240;&#x4EE5;&#x7684;&#x53F6;&#x5B50;&#x5408;&#x5E76;&#xFF0C;&#x5176;&#x635F;&#x5931;&#x51FD;&#x6570;&#x503C;&#x51CF;&#x5C0F;&#xFF0C;&#x5219;&#x8FDB;&#x884C;&#x526A;&#x679D;</li>
+<li>&#x7EE7;&#x7EED;2&#x76F4;&#x5230;&#x4E0D;&#x80FD;&#x5408;&#x5E76;&#x6216;&#x6839;&#x8282;&#x70B9;&#x4E3A;&#x6B62;</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/12/maching-learning-study-list/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          MachineLearning学习清单
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/12/the-notes-of-wecenter/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">wecenter学习笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="decision-tree-implement-in-python-notes" data-title="《决策树算法的Python实现》笔记" data-url="http://yungoo.github.io/2016/08/12/decision-tree-implement-in-python-notes/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 haiyang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: /
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

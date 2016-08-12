@@ -94,7 +94,7 @@
 <meta property="og:description" content="&amp;#x53C2;&amp;#x7167;&amp;#xFF1A;
 [1]: https://zhuanlan.zhihu.com/p/20794583 &amp;#x201C;&amp;#x51B3;&amp;#x7B56;&amp;#x6811;&amp;#x7B97;&amp;#x6CD5;&amp;#x7684;Python&amp;#x5B9E;&amp;#x73B0;&amp;#x201D;
 [2]: http://m.blog.csdn.net/article/details?">
-<meta property="og:updated_time" content="2016-08-12T03:11:27.000Z">
+<meta property="og:updated_time" content="2016-08-12T07:17:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《决策树算法的Python实现》笔记">
 <meta name="twitter:description" content="&amp;#x53C2;&amp;#x7167;&amp;#xFF1A;
@@ -337,7 +337,7 @@
 <p>\[g(D, A) = H(D) - H(D | A) \]</p>
 <p>&#x6761;&#x4EF6;&#x589E;&#x76CA;&#xFF1A;</p>
 <p>\[g_R(D|A) = \frac{g(D, A)}{H_A(D)}\]</p>
-<p>&#x5176;&#x4E2D;&#xFF1A;<br>\[ \begin{aligned}<br>&amp; H(D) =  -\sum_{k = 1}^K  \frac{|C_k|}{|D|} log\frac{|C<em>k|}{|D|} \\<br>&amp; H(D|A) = -\sum\</em>{i = 1}^n\frac{|D_i|}{|D|} H(D_i) = -\sum_{i = 1}^n\frac{|D_i|}{|D|} \sum_{k=1}^K \frac{|D_{ik}|}{|D_i|} log\frac{|D_{ik}|}{|D_i|} \\<br>&amp; H<em>A(D) = -\sum\</em>{i = 1}^n \frac{|D_i|}{|D|} log\frac{|D_i|}{|D|} \\<br>&amp; D &#x4E3A;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x6837;&#x672C;&#x5BB9;&#x91CF;&#x4E3A; |D| \\<br>&amp; &#x6700;&#x7EC8;&#x5206;&#x4E3A;K&#x4E2A;&#x7C7B;&#x522B;C_k&#xFF0C;&#x5404;&#x7C7B;&#x522B;&#x6837;&#x672C;&#x4E2A;&#x6570;|C_k| \\<br>&amp; &#x67D0;&#x4E00;&#x7279;&#x5F81;A&#x6709;n&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x53D6;&#x503C;a_1,a_2,&#x2026;,a_n \\<br>&amp; D&#x6839;&#x636E;&#x7279;&#x5F81;A&#x7684;&#x53D6;&#x503C;&#x53EF;&#x5C06;&#x6570;&#x636E;&#x96C6;D&#x5212;&#x5206;&#x4E3A;n&#x4E2A;&#x5B50;&#x96C6;D_1,D_2,&#x2026;,D_n, |D_i|&#x4E3A;D_i&#x7684;&#x6837;&#x672C;&#x4E2A;&#x6570; \\<br>&amp; &#x5B50;&#x96C6;D_i&#x4E2D;&#x5C5E;&#x4E8E;&#x7C7B;C_k&#x4E2D;&#x7684;&#x6837;&#x672C;&#x96C6;&#x5408;&#x4E3A;D_{ik}&#xFF0C;&#x5176;&#x6837;&#x672C;&#x4E2A;&#x6570;&#x4E3A;|D_{ik}| \\<br>\end{aligned} \]</p>
+<p>&#x5176;&#x4E2D;&#xFF1A;<br>\[\begin{aligned}<br>&amp; H(D) =  -\sum_{k = 1}^K  \frac{|C_k|}{|D|} log\frac{|C_k|}{|D|} \\<br>&amp; H(D|A) = -\sum_{i = 1}^n\frac{|D_i|}{|D|} H(D_i) = -\sum_{i = 1}^n\frac{|D_i|}{|D|} \sum_{k=1}^K \frac{|D_{ik}|}{|D_i|} log\frac{|D_{ik}|}{|D_i|} \\<br>&amp; H_A(D) = -\sum_{i = 1}^n \frac{|D_i|}{|D|} log\frac{|D_i|}{|D|} \\<br>&amp; D &#x4E3A;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x6837;&#x672C;&#x5BB9;&#x91CF;&#x4E3A; |D| \\<br>&amp; &#x6700;&#x7EC8;&#x5206;&#x4E3A;K&#x4E2A;&#x7C7B;&#x522B;C_k&#xFF0C;&#x5404;&#x7C7B;&#x522B;&#x6837;&#x672C;&#x4E2A;&#x6570;|C_k| \\<br>&amp; &#x67D0;&#x4E00;&#x7279;&#x5F81;A&#x6709;n&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x53D6;&#x503C;a_1,a_2,&#x2026;,a_n \\<br>&amp; D&#x6839;&#x636E;&#x7279;&#x5F81;A&#x7684;&#x53D6;&#x503C;&#x53EF;&#x5C06;&#x6570;&#x636E;&#x96C6;D&#x5212;&#x5206;&#x4E3A;n&#x4E2A;&#x5B50;&#x96C6;D_1,D_2,&#x2026;,D_n, |D_i|&#x4E3A;D_i&#x7684;&#x6837;&#x672C;&#x4E2A;&#x6570; \\<br>&amp; &#x5B50;&#x96C6;D_i&#x4E2D;&#x5C5E;&#x4E8E;&#x7C7B;C_k&#x4E2D;&#x7684;&#x6837;&#x672C;&#x96C6;&#x5408;&#x4E3A;D_{ik}&#xFF0C;&#x5176;&#x6837;&#x672C;&#x4E2A;&#x6570;&#x4E3A;|D_{ik}| \\<br>\end{aligned}\]</p>
 <blockquote>
 <p>&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF1A;</p>
 <p>&#x8BBE;X&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x9650;&#x72B6;&#x6001;&#x7684;&#x79BB;&#x6563;&#x578B;&#x968F;&#x673A;&#x53D8;&#x91CF;&#xFF0C;&#x5176;&#x6982;&#x7387;&#x5206;&#x5E03;&#x4E3A;</p>
@@ -747,7 +747,7 @@
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
         processEscapes: true,
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       }

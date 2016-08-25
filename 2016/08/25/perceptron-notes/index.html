@@ -1,0 +1,849 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="感知机 机器学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x672C;&amp;#x6587;&amp;#x6765;&amp;#x81EA;&amp;#x4E8E;&amp;#x9605;&amp;#x8BFB;&amp;#x300A;&amp;#x7EDF;&amp;#x8BA1;&amp;#x5B66;&amp;#x4E60;&amp;#x65B9;&amp;#x6CD5;&amp;#x300B;&amp;#x4E00;&amp;#x4E66;&amp;#x7684;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;
+
+&amp;#x611F;&amp;#x77E5;&amp;#x67">
+<meta property="og:type" content="article">
+<meta property="og:title" content="感知机">
+<meta property="og:url" content="http://yungoo.github.io/2016/08/25/perceptron-notes/index.html">
+<meta property="og:site_name" content="技术之路">
+<meta property="og:description" content="&amp;#x672C;&amp;#x6587;&amp;#x6765;&amp;#x81EA;&amp;#x4E8E;&amp;#x9605;&amp;#x8BFB;&amp;#x300A;&amp;#x7EDF;&amp;#x8BA1;&amp;#x5B66;&amp;#x4E60;&amp;#x65B9;&amp;#x6CD5;&amp;#x300B;&amp;#x4E00;&amp;#x4E66;&amp;#x7684;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;
+
+&amp;#x611F;&amp;#x77E5;&amp;#x67">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/25/perceptron-notes/./perceptron-notes/percetron-model.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/25/perceptron-notes/./perceptron-notes/xor-unseparatable.png">
+<meta property="og:image" content="http://yungoo.github.io/2016/08/25/perceptron-notes/./perceptron-notes/prime-quiz.png">
+<meta property="og:updated_time" content="2016-08-25T07:06:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="感知机">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x6587;&amp;#x6765;&amp;#x81EA;&amp;#x4E8E;&amp;#x9605;&amp;#x8BFB;&amp;#x300A;&amp;#x7EDF;&amp;#x8BA1;&amp;#x5B66;&amp;#x4E60;&amp;#x65B9;&amp;#x6CD5;&amp;#x300B;&amp;#x4E00;&amp;#x4E66;&amp;#x7684;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;
+
+&amp;#x611F;&amp;#x77E5;&amp;#x67">
+<meta name="twitter:image" content="http://yungoo.github.io/2016/08/25/perceptron-notes/./perceptron-notes/percetron-model.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yungoo.github.io/2016/08/25/perceptron-notes/"/>
+
+  <title> 感知机 | 技术之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">技术之路</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                感知机
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-25T09:28:43+08:00" content="2016-08-25">
+              2016-08-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/25/perceptron-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/25/perceptron-notes/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/25/perceptron-notes/" class="leancloud_visitors" data-flag-title="感知机">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>&#x672C;&#x6587;&#x6765;&#x81EA;&#x4E8E;&#x9605;&#x8BFB;&#x300A;&#x7EDF;&#x8BA1;&#x5B66;&#x4E60;&#x65B9;&#x6CD5;&#x300B;&#x4E00;&#x4E66;&#x7684;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;</p>
+</blockquote>
+<p>&#x611F;&#x77E5;&#x673A;&#x7531;Rosenblatt&#x4E8E;1957&#x5E74;&#x63D0;&#x51FA;&#xFF0C;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E0E;&#x652F;&#x6301;&#x5411;&#x91CF;&#x673A;&#x7684;&#x57FA;&#x7840;&#x3002;</p>
+<h2 id="&#x611F;&#x77E5;&#x673A;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;"><a href="#&#x611F;&#x77E5;&#x673A;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;" class="headerlink" title="&#x611F;&#x77E5;&#x673A;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;"></a>&#x611F;&#x77E5;&#x673A;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;</h2><p>&#x611F;&#x77E5;&#x673A;&#x662F;&#x4E8C;&#x7C7B;&#x5206;&#x7C7B;&#x7684;&#x7EBF;&#x6027;&#x5206;&#x7C7B;&#x6A21;&#x578B;&#xFF0C;&#x5C5E;&#x4E8E;&#x5224;&#x522B;&#x6A21;&#x578B;&#x3002;</p>
+<p>&#x611F;&#x77E5;&#x673A;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6C42;&#x51FA;&#x5C06;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x7EBF;&#x6027;&#x5212;&#x5206;&#x7684;&#x5206;&#x79BB;&#x8D85;&#x5E73;&#x9762;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x6709;&#x6563;&#x843D;&#x7684;&#x8C46;&#x5B50;&#x548C;&#x77F3;&#x5B50;&#xFF0C;&#x4F46;&#x5B83;&#x4EEC;&#x4E0D;&#x76F8;&#x4E92;&#x63BA;&#x6742;&#xFF0C;&#x5219;&#x53EA;&#x8981;&#x628A;&#x8C46;&#x5B50;&#x548C;&#x77F3;&#x5B50;&#x7684;<code>&#x4F4D;&#x7F6E;&#x5750;&#x6807;</code>&#xFF08;&#x7279;&#x5F81;&#x5411;&#x91CF;&#xFF09;&#x548C;<code>&#x7C7B;&#x522B;</code>&#xFF08;&#x8C46;&#x5B50;&#x7684;&#x7C7B;&#x522B;&#x4E3A; $$$+1$$$&#xFF0C;&#x77F3;&#x5B50;&#x7684;&#x7C7B;&#x522B;&#x4E3A; $$$-1$$$&#xFF09;&#x4EA4;&#x7ED9;&#x611F;&#x77E5;&#x673A;&#xFF0C;&#x5B83;&#x5C31;&#x53EF;&#x4EE5;&#x7B97;&#x51FA;&#x4E00;&#x6761;&#x5C06;&#x8C46;&#x5B50;&#x548C;&#x77F3;&#x5B50;&#x5206;&#x79BB;&#x7684;&#x76F4;&#x7EBF;&#xFF08;&#x8D85;&#x5E73;&#x9762;&#xFF09;&#x3002;</p>
+<h2 id="&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;"><a href="#&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;" class="headerlink" title="&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;"></a>&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;</h2><p>&#x5047;&#x8BBE;&#x8F93;&#x5165;&#x7A7A;&#x95F4;&#xFF08;&#x7279;&#x5F81;&#x7A7A;&#x95F4;&#xFF09;$$$ \chi \subseteq R^n $$$&#xFF0C;&#x8F93;&#x51FA;&#x7A7A;&#x95F4; $$$ \gamma \subseteq \{+1, -1\} $$$</p>
+<p>&#x8F93;&#x5165; $$$\vec{x} \in \chi$$$ &#x8868;&#x793A;&#x5B9E;&#x4F8B;&#x7684;&#x7279;&#x5F81;&#x5411;&#x91CF;&#xFF0C;&#x5BF9;&#x5E94;&#x4E8E;&#x8F93;&#x5165;&#x7A7A;&#x95F4;&#x7684;&#x70B9;</p>
+<p>&#x8F93;&#x51FA; $$$y \in \gamma$$$&#x8868;&#x793A;&#x5B9E;&#x4F8B;&#x7684;&#x7C7B;&#x522B;&#x3002;</p>
+<p>&#x5219; $$$\vec{x} \to y$$$&#x7684;&#x6620;&#x5C04;&#x51FD;&#x6570;</p>
+<p>\[ y = f(\vec{x}) = sign(\vec{w} \cdot \vec{x} + b) \]</p>
+<p>&#x79F0;&#x4E3A;<code>&#x611F;&#x77E5;&#x673A;</code>&#x3002;&#x5176;&#x4E2D;&#xFF1A;</p>
+<p>\[\begin{aligned}<br>\vec{w} &amp; \in R^n \textrm{&#xFF0C;&#x53EB;&#x505A;&#x6743;&#x503C;&#x5411;&#x91CF;(weight vector)} \\<br>b &amp; \in R \textrm{&#xFF0C;&#x53EB;&#x505A;&#x504F;&#x7F6E;&#x503C;(bias)} \\<br>sign(x) &amp; = \left\{ \begin{array}{cc}<br>  +1 &amp; \textrm{if x &gt; 0} \\<br>  -1 &amp; \textrm{x &lt; 0}<br>\end{array} \right.<br>\text{&#xFF0C;&#x4E3A;&#x7B26;&#x53F7;&#x51FD;&#x6570;}<br>\end{aligned}\]</p>
+<p>&#x611F;&#x77E5;&#x673A;&#x7684;&#x51E0;&#x4F55;&#x89E3;&#x91CA;</p>
+<p><img src="/2016/08/25/perceptron-notes/./perceptron-notes/percetron-model.png" alt="&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;"></p>
+<p>&#x7EBF;&#x6027;&#x65B9;&#x7A0B;</p>
+<p>\[ \vec{w} \cdot \vec{x} + b = 0 \]</p>
+<p>&#x5BF9;&#x5E94;&#x4E8E;&#x7279;&#x5F81;&#x7A7A;&#x95F4; $$$R^n$$$ &#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x8D85;&#x5E73;&#x9762; $$$S$$$&#xFF0C;&#x5176;&#x4E2D; $$$ \vec{w} $$$&#x662F;&#x8D85;&#x5E73;&#x9762;&#x7684;<code>&#x6CD5;&#x5411;&#x91CF;</code>&#xFF0C;$$$ b $$$ &#x662F;&#x8D85;&#x5E73;&#x9762;&#x7684;<code>&#x622A;&#x8DDD;</code>&#x3002;&#x4F4D;&#x4E8E;&#x8D85;&#x5E73;&#x9762;&#x4E24;&#x6D4B;&#x7684;&#x70B9;&#xFF08;&#x7279;&#x5F81;&#x5411;&#x91CF;&#xFF09;&#x5206;&#x522B;&#x88AB;&#x5206;&#x4E3A;&#x6B63;&#x3001;&#x8D1F;&#x4E24;&#x7C7B;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8D85;&#x5E73;&#x9762; $$$S$$$ &#x79F0;&#x4E3A;<code>&#x5206;&#x79BB;&#x8D85;&#x5E73;&#x9762;&#xFF08;separating hyperplane&#xFF09;</code>&#x3002;</p>
+<p>&#x611F;&#x77E5;&#x673A;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x7531;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;&#xFF08;&#x5B9E;&#x4F8B;&#x7684;&#x7279;&#x5F81;&#x5411;&#x91CF;&#x548C;&#x7C7B;&#x522B;&#xFF09;</p>
+<p>\[ T = \left\{ \left( x_1, y_1 \right), \left( x_2, y_2 \right), \ldots, \left( x_N, y_N \right) \right \} \]</p>
+<p>&#x5176;&#x4E2D;&#xFF0C;$$$ x_i \in R^n, y_i \in \gamma=\left\{ +1, -1 \right \}, i = 1,2,\ldots,  N $$$&#xFF0C;&#x6C42;&#x5F97;&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;&#x7684;&#x53C2;&#x6570; $$$ \vec{w}, b $$$&#x3002;</p>
+<p>&#x611F;&#x77E5;&#x673A;&#x9884;&#x6D4B;&#xFF0C; &#x901A;&#x8FC7;&#x5B66;&#x4E60;&#x5F97;&#x5230;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x5BF9;&#x4E8E;&#x8F93;&#x5165;&#x5B9E;&#x4F8B;&#x7ED9;&#x51FA;&#x5176;&#x5BF9;&#x5E94;&#x7684;&#x8F93;&#x51FA;&#x7C7B;&#x522B;&#x3002;</p>
+<h2 id="&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B56;&#x7565;"><a href="#&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B56;&#x7565;" class="headerlink" title="&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B56;&#x7565;"></a>&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B56;&#x7565;</h2><p>&#x5982;&#x679C;&#x6570;&#x636E;&#x96C6;&#x6EE1;&#x8DB3;</p>
+<p>\[ y = \left\{<br>\begin{array}{cc}<br>    +1 &amp; \vec{w} \cdot \vec{x} + b &gt; 0 \\<br>    -1 &amp; \vec{w} \cdot \vec{x} + b &lt; 0<br>\end{array}\right.<br>\]</p>
+<p>&#x5219;&#x79F0;&#x4E3A;<code>&#x7EBF;&#x6027;&#x53EF;&#x5206;&#x6570;&#x636E;&#x96C6;</code>&#x3002;</p>
+<blockquote>
+<p>&#x611F;&#x77E5;&#x673A;&#x7684;&#x524D;&#x63D0;&#x6761;&#x4EF6;&#x662F;&#x8981;&#x6C42;&#x6570;&#x636E;&#x96C6;&#x7EBF;&#x6027;&#x53EF;&#x5206;</p>
+</blockquote>
+<p><code>&#x5F02;&#x6216;&#x903B;&#x8F91;</code>&#x5C31;&#x662F;&#x7EBF;&#x6027;&#x4E0D;&#x53EF;&#x5206;&#x7684;&#x3002;</p>
+<p>&#x753B;&#x51FA;&#x5F02;&#x6216;&#x903B;&#x8F91;&#x7684;&#x8F93;&#x5165;(X1,X2,Y)&#x5B83;&#x4EEC;&#x5206;&#x5E03;&#x5728;&#x4E09;&#x7EF4;&#x7ACB;&#x65B9;&#x4F53;&#x7684;&#x9876;&#x9762;&#x548C;&#x5E95;&#x5E73;&#x9762;&#xFF0C;&#x5C06;&#x5B83;&#x4EEC;&#x6295;&#x5F71;&#x5230;XY&#x5E73;&#x9762;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x6B63;&#x8D1F;&#x5B9E;&#x4F8B;&#x5206;&#x5E03;&#x5728;&#x4EA4;&#x53C9;&#x7684;&#x5BF9;&#x89D2;&#x7EBF;&#x4E0A;&#xFF0C;&#x6545;&#x800C;&#x65E0;&#x6CD5;&#x7528;&#x67D0;&#x4E00;&#x76F4;&#x7EBF;&#x5C06;&#x5B83;&#x4EEC;&#x5206;&#x5F00;&#x3002;</p>
+<p><img src="/2016/08/25/perceptron-notes/./perceptron-notes/xor-unseparatable.png" alt="&#x7EBF;&#x6027;&#x4E0D;&#x53EF;&#x5206;"></p>
+<p>&#x8BE5;&#x56FE;&#x6765;&#x81EA;&#xFF1A;<a href="http://blog.csdn.net/panda07100/article/details/38580993" target="_blank" rel="external">http://blog.csdn.net/panda07100/article/details/38580993</a></p>
+<p>&#x611F;&#x77E5;&#x673A;&#x91C7;&#x7528;&#x8BEF;&#x5206;&#x7C7B;&#x70B9;&#x5230;&#x8D85;&#x5E73;&#x9762; $$$ S $$$ &#x7684;&#x603B;&#x8DDD;&#x79BB;&#x4F5C;&#x4E3A;&#x7ECF;&#x9A8C;&#x635F;&#x5931;&#x51FD;&#x6570;&#x3002;</p>
+<p>&#x8F93;&#x5165;&#x7A7A;&#x95F4; $$$ R^n $$$ &#x4E2D;&#x4EFB;&#x4E00;&#x70B9; $$$ x_0 $$$ &#x5230;&#x8D85;&#x5E73;&#x9762; $$$ S $$$ &#x7684;&#x8DDD;&#x79BB;&#x4E3A;&#xFF1A;</p>
+<p>\[ \frac{1}{ \parallel \vec{w} \parallel} | \vec{w} \cdot \vec{x_0} + b | \]</p>
+<p>&#x5176;&#x4E2D;&#xFF1A;</p>
+<p>\[ \parallel \vec{w} \parallel = \sqrt{ {w^{(0)}}^2 + {w^{(1)}}^2 + \ldots +  {w^{(n)}}^2 } \]</p>
+<p>&#x4E3A; $$$ \vec{w} $$$ &#x7684;L2&#x8303;&#x6570;&#x3002;</p>
+<p>&#x5BF9;&#x8BEF;&#x5206;&#x7C7B;&#x7684;&#x6570;&#x636E; $$$ \left( \vec{x_i}, y_i \right)$$$ &#x6765;&#x8BF4; </p>
+<p>\[  - y_i \left( \vec{w} \cdot \vec{x_i} + b \right) &gt; 0 \] </p>
+<p>&#x6052;&#x6210;&#x7ACB;&#xFF0C;&#x6545;&#x8BEF;&#x5206;&#x7C7B;&#x70B9; $$$ x_i $$$ &#x5230;&#x8D85;&#x5E73;&#x9762; $$$ S $$$ &#x7684;&#x8DDD;&#x79BB;&#x4E3A;</p>
+<p>\[ - \frac{1}{ \parallel \vec{w} \parallel} y_i \left( \vec{w} \cdot \vec{x_i} + b \right) \]</p>
+<p>&#x5219;&#x611F;&#x77E5;&#x673A;&#x7684;&#x7ECF;&#x9A8C;&#x635F;&#x5931;&#x51FD;&#x6570;&#x4E3A;</p>
+<p>\[ L(\vec{w}, b) = - \frac{1}{ \parallel \vec{w} \parallel} \sum_{\vec{x_i} \in M} y_i \left( \vec{w} \cdot \vec{x_i} + b \right) \equiv -\sum_{\vec{x_i} \in M} y_i \left( \vec{w} \cdot \vec{x_i} + b \right) \]</p>
+<p>&#x5176;&#x4E2D; $$$ M $$$ &#x4E3A;&#x8BEF;&#x5206;&#x7C7B;&#x70B9;&#x7684;&#x96C6;&#x5408;&#xFF0C;$$$ \frac{1}{ \parallel \vec{w} \parallel} $$$ &#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x3002;</p>
+<h2 id="&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;"><a href="#&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;" class="headerlink" title="&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;"></a>&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;</h2><p>&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#x662F;&#x8BEF;&#x5206;&#x7C7B;&#x70B9;&#x9A71;&#x52A8;&#x7684;&#xFF0C;&#x91C7;&#x7528;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#xFF08;stochastic gradient desent&#xFF09;&#x3002;</p>
+<h3 id="&#x539F;&#x59CB;&#x5F62;&#x5F0F;"><a href="#&#x539F;&#x59CB;&#x5F62;&#x5F0F;" class="headerlink" title="&#x539F;&#x59CB;&#x5F62;&#x5F0F;"></a>&#x539F;&#x59CB;&#x5F62;&#x5F0F;</h3><p>&#x7ED9;&#x5B9A;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;&#xFF08;&#x5B9E;&#x4F8B;&#x7684;&#x7279;&#x5F81;&#x5411;&#x91CF;&#x548C;&#x7C7B;&#x522B;&#xFF09;</p>
+<p>&#x5176;&#x4E2D;&#xFF0C;$$$ x_i \in R^n, y_i \in \gamma=\left\{ +1, -1 \right \}, i = 1,2,\ldots,  N $$$&#xFF0C;&#x6C42;&#x53C2;&#x6570; $$$ \vec{w}, b $$$&#xFF0C;&#x4F7F;&#x5176;&#x4E3A;&#x4EE5;&#x4E0B;&#x7ECF;&#x9A8C;&#x635F;&#x5931;&#x51FD;&#x6570;&#x7684;&#x6781;&#x5C0F;&#x5316;&#x95EE;&#x9898;&#x7684;&#x89E3;</p>
+<p>\[ \min\limits_{\vec{w}, b} {L(\vec{w}, b)} = -\sum_{\vec{x_i} \in M} y_i \left( \vec{w} \cdot \vec{x_i} + b \right) \]</p>
+<p>&#x5176;&#x4E2D; $$$ M $$$ &#x4E3A;&#x8BEF;&#x5206;&#x7C7B;&#x70B9;&#x7684;&#x96C6;&#x5408;&#x3002;</p>
+<p>&#x7B97;&#x6CD5;&#xFF1A;</p>
+<p><code>&#x8F93;&#x5165;</code>&#xFF1A;</p>
+<p>&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6; $$$ T = \left\{ \left( x_1, y_1 \right), \left( x_2, y_2 \right), \ldots, \left( x_N, y_N \right) \right \} $$$&#xFF0C; &#x5176;&#x4E2D; $$$ x_i \in R^n, y_i \in \gamma=\left\{ +1, -1 \right \}, i = 1,2,\ldots,  N $$$&#xFF1B;&#x5B66;&#x4E60;&#x7387; $$$ \eta (0 \lt \eta \le 1 ) $$$</p>
+<p><code>&#x8F93;&#x51FA;</code>&#xFF1A;</p>
+<p>\[ \vec{w}, b \]</p>
+<p>&#x5F97;&#x5230;&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;&#xFF1A;</p>
+<p>\[ y = f(\vec{x}) = sign(\vec{w} \cdot \vec{x} + b) \]</p>
+<p><code>&#x6B65;&#x9AA4;</code>&#xFF1A;</p>
+<ol>
+<li>&#x4EFB;&#x9009;&#x521D;&#x59CB;&#x8D85;&#x5E73;&#x9762; $$$ S&#xFF1D;(\vec{w_0}, b_0) $$$</li>
+<li>&#x5728;&#x8BAD;&#x7EC3;&#x96C6;&#x4E2D;&#x9009;&#x53D6;&#x6570;&#x636E; $$$ \left( x_i, y_i \right) $$$</li>
+<li>&#x5982;&#x679C; $$$ y_i \left( \vec{w} \cdot \vec{x_i} + b \right) \le 0 $$$&#xFF0C; &#x5219;&#x66F4;&#x65B0;<br>\[\begin{aligned}<br> \vec{w} &amp; \gets \vec{w} + \eta y_i \vec{x_i} \\<br> b &amp; \gets b + \eta y_i \\<br>\end{aligned}\]</li>
+<li>&#x8F6C;&#x81F3; 2&#xFF0C;&#x76F4;&#x5230;&#x8BAD;&#x7EC3;&#x96C6;&#x4E2D;&#x6CA1;&#x6709;&#x8BEF;&#x5206;&#x7C7B;&#x70B9;</li>
+</ol>
+<p>&#x793A;&#x4F8B;&#xFF1A;</p>
+<p><img src="/2016/08/25/perceptron-notes/./perceptron-notes/prime-quiz.png" alt="prime-quiz"></p>
+<p>&#x4EE3;&#x7801;&#x8BF7;&#x770B;&#xFF1A;<a href="https://github.com/yungoo/maching-learning-quiz/blob/master/perceptron/perceptron_primal.py" target="_blank" rel="external">https://github.com/yungoo/maching-learning-quiz/blob/master/perceptron/perceptron_primal.py</a></p>
+<h3 id="&#x5BF9;&#x5076;&#x5F62;&#x5F0F;"><a href="#&#x5BF9;&#x5076;&#x5F62;&#x5F0F;" class="headerlink" title="&#x5BF9;&#x5076;&#x5F62;&#x5F0F;"></a>&#x5BF9;&#x5076;&#x5F62;&#x5F0F;</h3><p>&#x6839;&#x636E;&#x539F;&#x59CB;&#x5F62;&#x5F0F;&#x7684;&#x8BA1;&#x7B97;&#x6B65;&#x9AA4;&#xFF0C;</p>
+<p>\[\begin{aligned}<br>    \vec{w} &amp; \gets \vec{w} + \eta y_i \vec{x_i} \\<br>    b &amp; \gets b + \eta y_i \\<br>\end{aligned}\]</p>
+<p>&#x9010;&#x6B65;&#x66F4;&#x65B0; $$$ \vec{w}, b $$$&#xFF0C;&#x8BBE;&#x4FEE;&#x6539; $$$ n $$$ &#x6B21;&#xFF0C;&#x5219; $$$ \vec{w}, b $$$ &#x5173;&#x4E8E; $$$ (\vec{x_i}, y_i) $$$ &#x7684;&#x589E;&#x91CF;&#x5206;&#x522B;&#x662F; $$$ a_i y_i \vec{x_i} $$$ &#x548C; $$$ a_i y_i $$$&#xFF0C;&#x5176;&#x4E2D; $$$ a_i = n_i \eta $$$&#xFF0C;&#x6545;</p>
+<p>\[\begin{aligned}<br>\vec{w} &amp; = \sum_{i=1}^{N} {a_i y_i \vec{x_i}} \\<br>b &amp; = \sum_{i=1}^{N} {a_i y_i}<br>\end{aligned}\]</p>
+<p>&#x5176;&#x4E2D; $$$ a_i \ge 0 , i = 1,2, \ldots, N $$$&#xFF0C;&#x5F53; $$$ \eta = 1 $$$ &#x65F6;&#xFF0C;&#x8868;&#x793A;&#x56E0;&#x8BEF;&#x5206;&#x7C7B;&#x70B9;&#x800C;&#x4FEE;&#x8FC7;&#x7684;&#x6B21;&#x6570;&#x3002;&#x5B9E;&#x4F8B;&#x70B9;&#x66F4;&#x65B0;&#x6B21;&#x6570;&#x8D8A;&#x591A;&#xFF0C;&#x610F;&#x8C13;&#x5B83;&#x8DDD;&#x79BB;&#x5206;&#x79BB;&#x8D85;&#x5E73;&#x9762;&#x8D8A;&#x8FD1;&#xFF0C;&#x4E5F;&#x5C31;&#x8D8A;&#x96BE;&#x6B63;&#x786E;&#x5206;&#x7C7B;&#x3002;</p>
+<p>&#x7B97;&#x6CD5;&#xFF1A;</p>
+<p><code>&#x8F93;&#x5165;</code>&#xFF1A;</p>
+<p>&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6; $$$ T = \left\{ \left( x_1, y_1 \right), \left( x_2, y_2 \right), \ldots, \left( x_N, y_N \right) \right \} $$$&#xFF0C; &#x5176;&#x4E2D; $$$ x_i \in R^n, y_i \in \gamma=\left\{ +1, -1 \right \}, i = 1,2,\ldots,  N $$$&#xFF1B;&#x5B66;&#x4E60;&#x7387; $$$ \eta (0 \lt \eta \le 1 ) $$$</p>
+<p><code>&#x8F93;&#x51FA;</code>&#xFF1A;</p>
+<p>\[ \vec{a}, b \]</p>
+<p>&#x5F97;&#x5230;&#x611F;&#x77E5;&#x673A;&#x6A21;&#x578B;&#xFF1A;</p>
+<p>\[ y = f(\vec{x}) = sign(\sum_{i=1}^{N} {a_i y_i \vec{x_i}} \cdot \vec{x} + b) \]</p>
+<p>&#x5176;&#x4E2D; $$$ \vec{a} = (a_1, a_2,\ldots,a_N)^T $$$&#x3002;</p>
+<p><code>&#x6B65;&#x9AA4;</code>&#xFF1A;</p>
+<ol>
+<li>$$$ \vec{a} \gets \vec{0},  b \gets 0 $$$</li>
+<li>&#x5728;&#x8BAD;&#x7EC3;&#x96C6;&#x4E2D;&#x9009;&#x53D6;&#x6570;&#x636E; $$$ (x_i, y_i) $$$</li>
+<li>&#x5982;&#x679C; $$$ y_i \left( \sum_{i=1}^{N} {a_i y_i \vec{x_i}} \cdot \vec{x} + b \right) \le 0 $$$&#xFF0C; &#x5219;&#x66F4;&#x65B0;<br>\[\begin{aligned}<br> a_i &amp; \gets a_i + \eta \\<br> b &amp; \gets b + \eta y_i \\<br>\end{aligned}\]</li>
+<li>&#x8F6C;&#x81F3; 2&#xFF0C;&#x76F4;&#x5230;&#x8BAD;&#x7EC3;&#x96C6;&#x4E2D;&#x6CA1;&#x6709;&#x8BEF;&#x5206;&#x7C7B;&#x70B9;</li>
+</ol>
+<p>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x8BAD;&#x7EC3;&#x96C6;&#x5B9E;&#x4F8B;&#x95F4;&#x7684;<code>&#x5185;&#x79EF;</code>&#x8BA1;&#x7B97;&#x51FA;&#x4E86;&#x5B58;&#x50A8;&#x79F0;&#x4E3A;Gram&#x77E9;&#x9635;</p>
+<p>\[ G = \left( \vec{x_i} \cdot \vec{y_i} \right)_{N \times N} \]</p>
+<p>&#x6F14;&#x793A;&#x4EE3;&#x7801;</p>
+<p>&#x53C2;&#x7167;&#xFF1A;<a href="https://github.com/yungoo/maching-learning-quiz/blob/master/perceptron/perceptron_dual.py" target="_blank" rel="external">https://github.com/yungoo/maching-learning-quiz/blob/master/perceptron/perceptron_dual.py</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/感知机-机器学习/" rel="tag">#感知机 机器学习</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/12/maching-learning-study-list/" rel="next" title="MachineLearning学习清单">
+                <i class="fa fa-chevron-left"></i> MachineLearning学习清单
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/08/25/perceptron-notes/"
+     data-title="感知机"
+     data-content=""
+     data-url="http://yungoo.github.io/2016/08/25/perceptron-notes/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/25/perceptron-notes/"
+           data-title="感知机" data-url="http://yungoo.github.io/2016/08/25/perceptron-notes/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="haiyang" />
+          <p class="site-author-name" itemprop="name">haiyang</p>
+          <p class="site-description motion-element" itemprop="description">发现、记录、分享</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机的使用场景"><span class="nav-number">1.</span> <span class="nav-text">感知机的使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">2.</span> <span class="nav-text">感知机模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">3.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机学习算法"><span class="nav-number">4.</span> <span class="nav-text">感知机学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始形式"><span class="nav-number">4.1.</span> <span class="nav-text">原始形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对偶形式"><span class="nav-number">4.2.</span> <span class="nav-text">对偶形式</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haiyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yungoo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$$$','$$$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("vtBhNzlLVNRR2wQTEJ3o2wU2-gzGzoHsz", "qQqVKCbLYrQJpY0CT1rCJ0Ki");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

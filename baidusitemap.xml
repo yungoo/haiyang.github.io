@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/09/08/knn/</loc>
+    <lastmod>2016-09-09T01:22:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>k近邻法</title>
+        <pubTime>2016-09-08T15:43:50.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+        <tag>k近邻</tag>
+         
+        <tag>分类</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/decision-tree-implement-in-python-notes/</loc>
+    <lastmod>2016-09-08T08:19:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>《决策树算法的Python实现》笔记</title>
+        <pubTime>2016-08-12T03:10:13.000Z</pubTime>
+        
+        <tag>maching-learning</tag>
+         
+        <tag>python</tag>
+         
+        <tag>decision-tree</tag>
+         
+        <tag>笔记</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/thinking-of-duiba-business/</loc>
+    <lastmod>2016-09-08T06:46:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>兑吧积分商城模式思考</title>
+        <pubTime>2016-08-12T02:57:33.000Z</pubTime>
+        
+        <tag>行业知识</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/25/perceptron-notes/</loc>
+    <lastmod>2016-09-08T06:46:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>感知机</title>
+        <pubTime>2016-08-25T01:28:43.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+        <tag>感知机</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/09/08/naive-bayesian-notes/</loc>
+    <lastmod>2016-09-08T06:44:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>朴素贝叶斯法</title>
+        <pubTime>2016-09-08T05:44:41.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+        <tag>naive-Bayes</tag>
+         
+        <tag>分类算法</tag>
+         
+        <tag>极大似然估计</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/java-faq/</loc>
+    <lastmod>2016-08-26T08:11:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>java-faq</title>
+        <pubTime>2016-08-12T02:33:59.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/stage-of-k12-education/</loc>
+    <lastmod>2016-08-26T08:10:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于K12教育类产品的现状和发展</title>
+        <pubTime>2016-08-12T03:02:41.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+        <tag>行业知识</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/the-notes-of-wecenter/</loc>
+    <lastmod>2016-08-26T08:10:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>wecenter学习笔记</title>
+        <pubTime>2016-08-12T03:08:01.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+        <tag>php</tag>
+         
+        <tag>wecenter</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/raft-learning-plan/</loc>
+    <lastmod>2016-08-26T08:09:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>Raft学习计划</title>
+        <pubTime>2016-08-12T02:49:18.000Z</pubTime>
+        
+        <tag>raft</tag>
+         
+        <tag>learning-plan</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/raft-extended-paper-notes/</loc>
+    <lastmod>2016-08-26T08:09:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>《In Search of an Understandable Consensus Algorithm(Extended Version)》阅读笔记</title>
+        <pubTime>2016-08-12T02:39:46.000Z</pubTime>
+        
+        <tag>raft</tag>
+         
+        <tag>algorithm</tag>
+         
+        <tag>distribute-system</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://yungoo.github.io/2016/08/12/maching-learning-study-list/</loc>
+    <lastmod>2016-08-12T03:12:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>MachineLearning学习清单</title>
+        <pubTime>2016-08-12T03:12:12.000Z</pubTime>
+        
+        <tag>maching-learning</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>
